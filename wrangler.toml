@@ -2,6 +2,14 @@ name = "rss-worker"
 main = "src/index.js"
 compatibility_date = "2023-09-04"
 
+account_id = "d9e259f328167af6c866c4e624f12c0d"
+workers_dev = true
+
+
+[[r2_buckets]]
+binding = 'CDN_BUCKET'
+bucket_name = 'cdn'
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/workers/platform/environment-variables
