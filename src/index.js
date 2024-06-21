@@ -104,26 +104,26 @@ const headersCORS = {
             });
 
             // If the put operation succeeds (no error is thrown), return a success response
-            return new Response(`Post Successfully uploaded`, { status: 200 });
+            return new Response(`Post Successfully uploaded`, { status: 200, headers: headersCORS });
           } catch (error) {
             // If an error occurs during the put operation, return a failure response
-            return new Response(`Failed to upload Post: ${error.message}`, { status: 500 });
+            return new Response(`Failed to upload Post: ${error.message}`, { status: 500, headers: headersCORS });
           }
 
 
         } catch (e) {
-          return new Response(e, { status: 400 });
+          return new Response(e, { status: 400, headers: headersCORS });
         }
 
       } else {
-        return new Response('Method Not Allowed', { status: 405 });
+        return new Response('Method Not Allowed', { status: 405, headers: headersCORS });
       }
 
     } else if (url.pathname === "/blog/delete_post") {
       if (request.method === 'DELETE') {
 
         if (!hasValidHeader(request)) {
-          return new Response('Unauthorized', { status: 401 });
+          return new Response('Unauthorized', { status: 401, headers: headersCORS });
         }
 
         try {
@@ -158,15 +158,15 @@ const headersCORS = {
             }
           });
 
-          return new Response(`Post Successfully deleted`, { status: 200 });
+          return new Response(`Post Successfully deleted`, { status: 200, headers: headersCORS });
         } catch (e) {
-          return new Response('Failed to delete Post', { status: 500 });
+          return new Response('Failed to delete Post: ' + e, { status: 500, headers: headersCORS });
         }
       }
-      return new Response('Method Not Allowed', { status: 405 });
+      return new Response('Method Not Allowed', { status: 405, headers: headersCORS });
     } else {
       // Handle other routes or return a 404 response
-      return new Response('Not Found', { status: 404 });
+      return new Response('Not Found', { status: 404, headers: headersCORS });
     }
   };
 
@@ -190,9 +190,9 @@ const headersCORS = {
     return `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-      <title>Your Blog Title</title>
+      <title>Jonas_Jones Blog</title>
       <link>${DOMAIN}</link>
-      <description>Your blog description</description>
+      <description>Blog by Jonas_Jones</description>
       <language>en-us</language>
       <pubDate>${new Date().toUTCString()}</pubDate>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
